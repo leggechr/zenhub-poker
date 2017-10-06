@@ -3,6 +3,10 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var R = require('ramda');
+
+var estimates = [];
+
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
@@ -11,9 +15,10 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   console.log('a user connected');
-  socket.on('submit estimate', function(estimate){
-    console.log('estimate', estimate);
-    io.emit('submit estimate', estimate);
+  socket.on('submit estimate', function(estimate) {
+    estimates = R.append({value: estimate}, estimates);
+
+    io.emit('estimates updated', estimates);
   });
   socket.on('disconnect', function(){
     console.log('user disconnected');
