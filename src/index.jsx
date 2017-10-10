@@ -7,9 +7,9 @@ const socket = io();
 import EstimateList from './EstimateList.jsx';
 import EstimateInput from './EstimateInput.jsx';
 
-function submitEstimate(e) {
+function submitEstimate(estimateInfo) {
   console.log('submitEstimate');
-  socket.emit('submit estimate', 0);
+  socket.emit('submit estimate', estimateInfo);
 }
 
 class Index extends React.Component {
@@ -37,7 +37,7 @@ class Index extends React.Component {
     return (
       <div>
       <EstimateList estimates={this.state.estimates} />
-      <button onClick={submitEstimate} >submit</button>
+      <EstimateInput submitEstimate={submitEstimate} />
       </div>
     );
   }

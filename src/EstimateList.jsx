@@ -6,7 +6,7 @@ class EstimateList extends React.PureComponent {
     const { estimates } = this.props;
     return (
       R.map((estimate) => (
-        <div>{estimate.value}</div>
+        <div>{estimate.estimate}</div>
       ), estimates)
     );
   }

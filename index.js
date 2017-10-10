@@ -16,7 +16,7 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('submit estimate', function(estimate) {
-    estimates = R.append({value: estimate}, estimates);
+    estimates = R.append(estimate, estimates);
 
     io.emit('estimates updated', estimates);
   });
