@@ -24,6 +24,7 @@ class EstimateInput extends React.PureComponent {
   handleSubmit(e) {
     e.preventDefault();
     this.props.submitEstimate(this.state);
+    this.setState({ name: '', estimate: ''});
   }
 
   render() {
